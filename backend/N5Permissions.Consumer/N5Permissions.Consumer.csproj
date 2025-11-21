@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-N5Permissions.Consumer-3e52f616-0ef7-46b3-9545-f454bf446790</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="2.12.0" />
+    <PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.13.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\N5Permissions.Application\N5Permissions.Application.csproj" />
+    <ProjectReference Include="..\N5Permissions.Domain\N5Permissions.Domain.csproj" />
+    <ProjectReference Include="..\N5Permissions.Infrastructure\N5Permissions.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- TEST RUNNER -->
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+
+		<!-- XUNIT -->
+		<PackageReference Include="xunit" Version="2.6.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.6" />
+
+		<!-- MOQ -->
+		<PackageReference Include="Moq" Version="4.20.69" />
+
+		<!-- WEB TESTING -->
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.0" />
+
+		<!-- SQLITE IN-MEMORY -->
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\N5Permissions.API\N5Permissions.API.csproj" />
+		<ProjectReference Include="..\N5Permissions.Application\N5Permissions.Application.csproj" />
+		<ProjectReference Include="..\N5Permissions.Infrastructure\N5Permissions.Infrastructure.csproj" />
+		<ProjectReference Include="..\N5Permissions.Domain\N5Permissions.Domain.csproj" />
+	</ItemGroup>
+
+</Project>
