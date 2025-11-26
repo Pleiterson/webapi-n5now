@@ -31,6 +31,7 @@
 		<ProjectReference Include="..\N5Permissions.Application\N5Permissions.Application.csproj" />
 		<ProjectReference Include="..\N5Permissions.Infrastructure\N5Permissions.Infrastructure.csproj" />
 		<ProjectReference Include="..\N5Permissions.Domain\N5Permissions.Domain.csproj" />
+		<ProjectReference Include="..\N5Permissions.Consumer\N5Permissions.Consumer.csproj" />
 	</ItemGroup>
 
 </Project>

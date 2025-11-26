@@ -12,10 +12,9 @@ Host.CreateDefaultBuilder(args)
         services.Configure<ElasticSettings>(
             context.Configuration.GetSection("ElasticSearch"));
 
-        services.AddSingleton<ElasticSearchService>();
-        services.AddSingleton<EventProcessorService>();
-
+        services.AddSingleton<IElasticSearchService, ElasticSearchService>();
         services.AddHostedService<KafkaConsumerService>();
+        services.AddSingleton<EventProcessorService>();
     })
     .Build()
     .Run();

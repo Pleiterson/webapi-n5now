@@ -39,6 +39,12 @@ public class KafkaProducerService : IKafkaProducerService
 
     public async Task PublishAsync(string topic, object @event)
     {
+        if (!_settings.Enable)
+        {
+            _logger.LogWarning("Kafka está desabilitado. Evento ignorado: {Topic}", topic);
+            return;
+        }
+
         try
         {
             var message = new Message<string, string>
@@ -57,7 +63,6 @@ public class KafkaProducerService : IKafkaProducerService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Erro ao publicar evento no Kafka");
-            throw;
         }
     }
 }

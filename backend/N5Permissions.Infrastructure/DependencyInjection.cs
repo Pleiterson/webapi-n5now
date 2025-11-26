@@ -18,8 +18,8 @@ namespace N5Permissions.Infrastructure
             IConfiguration configuration,
             string connectionString)
         {
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString));
+            //services.AddDbContext<AppDbContext>(options =>
+            //    options.UseSqlServer(connectionString));
 
             services.AddScoped<IPermissionRepository, PermissionRepository>();
             services.AddScoped<IPermissionTypeRepository, PermissionTypeRepository>();

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace N5Permissions.Consumer.Services;
 
-public class ElasticSearchService
+public class ElasticSearchService : IElasticSearchService
 {
     private readonly ElasticLowLevelClient _client;
     private readonly ElasticSettings _settings;

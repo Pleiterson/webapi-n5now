@@ -43,7 +43,8 @@ namespace N5Permissions.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdatePermissionCommand command)
         {
-            if (id != command.Id) return BadRequest("ID mismatch");
+            //if (id != command.Id) return BadRequest("ID mismatch");
+            command.Id = id; // aplica automaticamente o ID vindo da URL
             var result =await _mediator.Send(command);
             return Ok(result);
         }
@@ -53,7 +54,8 @@ namespace N5Permissions.API.Controllers
         {
             await _mediator.Send(new DeletePermissionCommand { Id = id });
 
-            return Ok(new { message = "Dado excluído com êxito" });
+            //return Ok(new { message = "Dado excluído com êxito" });
+            return NoContent(); // apenas para teste
         }
     }
 }

@@ -8,9 +8,9 @@ namespace N5Permissions.Consumer.Services;
 
 public class EventProcessorService
 {
-    private readonly ElasticSearchService _elastic;
+    private readonly IElasticSearchService _elastic;
 
-    public EventProcessorService(ElasticSearchService elastic)
+    public EventProcessorService(IElasticSearchService elastic)
     {
         _elastic = elastic;
     }
@@ -19,7 +19,7 @@ public class EventProcessorService
     {
         switch (topic)
         {
-            case "permission_created":
+            case "permissions-created":
                 var created = JsonSerializer.Deserialize<PermissionCreatedEvent>(message);
                 await _elastic.IndexPermissionAsync(new PermissionDocument
                 {
@@ -31,7 +31,7 @@ public class EventProcessorService
                 });
                 break;
 
-            case "permission_updated":
+            case "permissions-updated":
                 var updated = JsonSerializer.Deserialize<PermissionUpdatedEvent>(message);
                 await _elastic.IndexPermissionAsync(new PermissionDocument
                 {
@@ -43,12 +43,12 @@ public class EventProcessorService
                 });
                 break;
 
-            case "permission_deleted":
+            case "permissions-deleted":
                 var deleted = JsonSerializer.Deserialize<PermissionDeletedEvent>(message);
                 await _elastic.DeletePermissionAsync(deleted.Id);
                 break;
 
-            case "permissiontype_created":
+            case "permissiontypes-created":
                 var ptc = JsonSerializer.Deserialize<PermissionTypeCreatedEvent>(message);
                 await _elastic.IndexPermissionTypeAsync(new PermissionTypeDocument
                 {
@@ -57,7 +57,7 @@ public class EventProcessorService
                 });
                 break;
 
-            case "permissiontype_updated":
+            case "permissiontypes-updated":
                 var ptu = JsonSerializer.Deserialize<PermissionTypeUpdatedEvent>(message);
                 await _elastic.IndexPermissionTypeAsync(new PermissionTypeDocument
                 {
@@ -66,7 +66,7 @@ public class EventProcessorService
                 });
                 break;
 
-            case "permissiontype_deleted":
+            case "permissiontypes-deleted":
                 var ptd = JsonSerializer.Deserialize<PermissionTypeDeletedEvent>(message);
                 await _elastic.DeletePermissionTypeAsync(ptd.Id);
                 break;

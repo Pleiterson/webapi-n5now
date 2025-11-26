@@ -32,7 +32,7 @@ namespace N5Permissions.Application.Commands.Permissions.DeletePermission
                 Id = request.Id
             };
 
-            await _producer.PublishAsync("permissions", evt);
+            await _producer.PublishAsync("permissions-deleted", evt);
 
             return Unit.Value;
         }

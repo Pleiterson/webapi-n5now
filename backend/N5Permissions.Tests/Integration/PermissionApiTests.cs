@@ -2,6 +2,7 @@ using N5Permissions.Tests.Integration;
 using System;
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -11,7 +12,7 @@ public class PermissionApiTests : IClassFixture<ApiTestFixture>
 
     public PermissionApiTests(ApiTestFixture factory)
     {
-        _client = factory.CreateClient();
+        _client = factory.Client;
     }
 
     [Fact]
@@ -41,49 +42,44 @@ public class PermissionApiTests : IClassFixture<ApiTestFixture>
     [Fact]
     public async Task UpdatePermission_ShouldReturn200()
     {
-        // Primeiro criar
-        var created = await _client.PostAsJsonAsync("/api/permissions", new
+        var createResponse = await _client.PostAsJsonAsync("/api/permissions", new
         {
-            nombreEmpleado = "Test",
-            apellidoEmpleado = "User",
+            nombreEmpleado = "John",
+            apellidoEmpleado = "Doe",
             tipoPermiso = 1,
             fechaPermiso = DateTime.UtcNow
         });
 
-        var createdObj = await created.Content.ReadFromJsonAsync<dynamic>();
-        int id = createdObj.id;
+        var createdJson = await createResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var id = createdJson.GetProperty("id").GetInt32();
 
-        // Agora atualizar
-        var response = await _client.PutAsJsonAsync($"/api/permissions/{id}", new
+        var updateResponse = await _client.PutAsJsonAsync($"/api/permissions/{id}", new
         {
-            id,
-            nombreEmpleado = "Test UPDATED",
-            apellidoEmpleado = "User UPDATED",
-            tipoPermiso = 2,
+            nombreEmpleado = "Updated",
+            apellidoEmpleado = "Updated",
+            tipoPermiso = 1,
             fechaPermiso = DateTime.UtcNow
         });
 
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, updateResponse.StatusCode);
     }
 
     [Fact]
     public async Task DeletePermission_ShouldReturn204()
     {
-        // criar
-        var created = await _client.PostAsJsonAsync("/api/permissions", new
+        var createResponse = await _client.PostAsJsonAsync("/api/permissions", new
         {
-            nombreEmpleado = "Delete",
-            apellidoEmpleado = "Me",
+            nombreEmpleado = "John",
+            apellidoEmpleado = "Doe",
             tipoPermiso = 1,
             fechaPermiso = DateTime.UtcNow
         });
 
-        var createdObj = await created.Content.ReadFromJsonAsync<dynamic>();
-        int id = createdObj.id;
+        var json = await createResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var id = json.GetProperty("id").GetInt32();
 
-        // deletar
-        var res = await _client.DeleteAsync($"/api/permissions/{id}");
+        var deleteResponse = await _client.DeleteAsync($"/api/permissions/{id}");
 
-        Assert.Equal(HttpStatusCode.NoContent, res.StatusCode);
+        Assert.Equal(HttpStatusCode.NoContent, deleteResponse.StatusCode);
     }
 }

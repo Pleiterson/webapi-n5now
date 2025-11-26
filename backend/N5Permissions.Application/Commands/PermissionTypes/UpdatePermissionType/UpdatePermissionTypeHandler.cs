@@ -34,7 +34,7 @@ namespace N5Permissions.Application.Commands.PermissionTypes.UpdatePermissionTyp
                 Description = entity.Description
             };
 
-            await _producer.PublishAsync("permission-types", evt);
+            await _producer.PublishAsync("permissiontypes-updated", evt);
 
             return new PermissionTypeDto
             {

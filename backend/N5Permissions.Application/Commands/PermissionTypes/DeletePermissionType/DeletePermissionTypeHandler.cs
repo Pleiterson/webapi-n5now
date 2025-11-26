@@ -31,7 +31,7 @@ namespace N5Permissions.Application.Commands.PermissionTypes.DeletePermissionTyp
                 Id = request.Id
             };
 
-            await _producer.PublishAsync("permission-types", evt);
+            await _producer.PublishAsync("permissiontypes-deleted", evt);
 
             return true;
         }

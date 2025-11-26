@@ -1,4 +1,5 @@
 using Moq;
+using MediatR;
 using N5Permissions.Application.Commands.Permissions.DeletePermission;
 using N5Permissions.Application.Common.Interfaces.Messaging;
 using N5Permissions.Domain.Entities;
@@ -41,7 +42,8 @@ public class DeletePermissionCommandHandlerTests
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
-        Assert.True(result);
+        Assert.Equal(Unit.Value, result);
+        //Assert.IsType<Unit>(result);
         _repoMock.Verify(r => r.DeleteAsync(dbEntity), Times.Once);
         _producerMock.Verify(p =>
             p.PublishAsync("permissions-deleted", It.IsAny<object>()),

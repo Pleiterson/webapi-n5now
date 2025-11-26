@@ -37,7 +37,7 @@ namespace N5Permissions.Application.Commands.Permissions.UpdatePermission
                 FechaPermiso = entity.FechaPermiso
             };
 
-            await _producer.PublishAsync("permissions", evt);
+            await _producer.PublishAsync("permissions-updated", evt);
 
             return Unit.Value;
         }

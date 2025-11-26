@@ -1,10 +1,10 @@
 using Moq;
 using N5Permissions.Application.Commands.Permissions.CreatePermission;
 using N5Permissions.Application.Common.Interfaces.Messaging;
-using N5Permissions.Application.DTOs;
 using N5Permissions.Domain.Entities;
 using N5Permissions.Domain.Repositories;
 using System;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -27,7 +27,7 @@ public class CreatePermissionCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_Should_Create_Permission_And_Publish_Event()
+    public async Task Handle_Should_Return_New_Id_And_Publish_Event()
     {
         // Arrange
         var command = new CreatePermissionCommand
@@ -43,21 +43,21 @@ public class CreatePermissionCommandHandlerTests
             .Setup(r => r.AddAsync(It.IsAny<Permission>()))
             .ReturnsAsync((Permission p) =>
             {
-                // Simula que o DB gerou o ID
-                typeof(Permission)
-                    .GetProperty("Id")
-                    .SetValue(p, 10);
-
+                // cria a mesma entidade (ou use a passada) e define Id via reflection
+                var prop = typeof(Permission).GetProperty("Id", BindingFlags.Public | BindingFlags.Instance);
+                if (prop != null)
+                {
+                    // usa reflection para setar o id (setter é privado no entity)
+                    prop.SetValue(p, 10);
+                }
                 return p;
             });
 
         // Act
-        var result = await _handler.Handle(command, CancellationToken.None);
+        var resultId = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
-        Assert.NotNull(result);
-        Assert.Equal(10, result.Id);
-        Assert.Equal("Pleiterson", result.NombreEmpleado);
+        Assert.Equal(10, resultId);
 
         _permissionRepoMock.Verify(
             r => r.AddAsync(It.IsAny<Permission>()),
