@@ -1,0 +1,31 @@
+{
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [
+        "actualizado",
+        "apellido",
+        "Cambios",
+        "Comportamiento",
+        "creado",
+        "datos",
+        "Descripción",
+        "desea",
+        "Edición",
+        "Empleado",
+        "encontraron",
+        "encontró",
+        "ningún",
+        "nombre",
+        "Nuevo",
+        "obligatorio",
+        "permiso",
+        "Permiso",
+        "permisos",
+        "permissiontype",
+        "permissiontypes"
+    ],
+    "ignoreWords": [],
+    "import": []
+}

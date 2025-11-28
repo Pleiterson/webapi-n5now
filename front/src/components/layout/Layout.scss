@@ -1,0 +1,10 @@
+.layout {
+  width: 100%;
+  min-height: 100vh;
+
+  &__content {
+    padding: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}

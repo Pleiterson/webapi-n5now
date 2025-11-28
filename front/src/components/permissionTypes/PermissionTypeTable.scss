@@ -1,0 +1,29 @@
+.pt-table {
+  border-radius: 12px;
+
+  table {
+    th {
+      background: #f7f7f7;
+      font-weight: 600;
+      color: #333;
+      padding: 12px;
+    }
+
+    td {
+      padding: 12px;
+      font-size: 15px;
+    }
+
+    tr:hover {
+      background: #fafafa;
+    }
+  }
+
+  .MuiIconButton-root {
+    transition: 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

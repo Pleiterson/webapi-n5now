@@ -1,0 +1,27 @@
+.permission-form {
+  padding: 20px;
+  border-radius: 8px;
+
+  h2 {
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .MuiTextField-root {
+      background: #fff;
+    }
+
+    button {
+      margin-top: 8px;
+      padding: 10px 0;
+      font-weight: 600;
+      font-family: "Manrope", sans-serif;
+    }
+  }
+}
